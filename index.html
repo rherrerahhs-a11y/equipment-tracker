@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Equipment Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="wrap">
+    <h1>Equipment Tracker</h1>
+    <p class="muted">Track tractors, trucks, trailers, and service history.</p>
+  </header>
+
+  <main class="wrap grid">
+    <section class="card">
+      <h2>Add Equipment</h2>
+      <form id="equipForm" class="form">
+        <div class="row">
+          <label>Type
+            <select name="type" required>
+              <option value="">Select…</option>
+              <option>Truck</option>
+              <option>Tractor</option>
+              <option>Trailer</option>
+              <option>Skid Steer</option>
+              <option>Excavator</option>
+              <option>Sprayer</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label>Nickname
+            <input name="nickname" placeholder="F350 Service Truck" />
+          </label>
+        </div>
+
+        <div class="row">
+          <label>Make <input name="make" placeholder="Ford / John Deere" /></label>
+          <label>Model <input name="model" placeholder="F-350 / 5085E" /></label>
+        </div>
+
+        <div class="row">
+          <label>Year <input name="year" inputmode="numeric" placeholder="2014" /></label>
+          <label>VIN / Serial <input name="vin" placeholder="VIN or serial number" /></label>
+        </div>
+
+        <div class="row">
+          <label>Plate <input name="plate" placeholder="8ABC123" /></label>
+          <label>Location <input name="location" placeholder="Shop / Farm / Jobsite" /></label>
+        </div>
+
+        <div class="row">
+          <label>Current Miles <input name="miles" inputmode="numeric" placeholder="123456" /></label>
+          <label>Current Hours <input name="hours" inputmode="numeric" placeholder="2450" /></label>
+        </div>
+
+        <button type="submit">Add Equipment</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Equipment</h2>
+      <div class="row">
+        <input id="search" placeholder="Search (make, model, nickname, VIN…)" />
+        <select id="filterType">
+          <option value="">All types</option>
+          <option>Truck</option><option>Tractor</option><option>Trailer</option>
+          <option>Skid Steer</option><option>Excavator</option><option>Sprayer</option><option>Other</option>
+        </select>
+      </div>
+      <div id="equipmentList" class="list"></div>
+    </section>
+
+    <section class="card">
+      <h2>Service Log</h2>
+      <form id="serviceForm" class="form">
+        <label>Equipment
+          <select id="serviceEquip" name="equipId" required></select>
+        </label>
+
+        <div class="row">
+          <label>Date <input name="date" type="date" required /></label>
+          <label>Service Type
+            <select name="serviceType" required>
+              <option value="">Select…</option>
+              <option>Oil Change</option>
+              <option>Fuel Filters</option>
+              <option>Air Filter</option>
+              <option>Hydraulic Service</option>
+              <option>Coolant</option>
+              <option>Transmission</option>
+              <option>Brakes</option>
+              <option>Tires</option>
+              <option>Repair</option>
+              <option>Inspection</option>
+              <option>Other</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="row">
+          <label>Odometer / Hours at service <input name="atReading" inputmode="numeric" placeholder="miles or hours" /></label>
+          <label>Cost ($) <input name="cost" inputmode="decimal" placeholder="0.00" /></label>
+        </div>
+
+        <div class="row">
+          <label>Next Due (miles/hours) <input name="nextDueReading" inputmode="numeric" placeholder="e.g., +5000 miles or 250 hours" /></label>
+          <label>Vendor <input name="vendor" placeholder="Parts store / shop / self" /></label>
+        </div>
+
+        <label>Notes
+          <textarea name="notes" rows="3" placeholder="What was done, parts used, etc."></textarea>
+        </label>
+
+        <button type="submit">Add Service Record</button>
+      </form>
+
+      <h3 class="mt">Due Soon / Overdue</h3>
+      <div id="dueList" class="list"></div>
+
+      <h3 class="mt">Recent Service</h3>
+      <div id="serviceList" class="list"></div>
+
+      <div class="row mt">
+        <button id="exportBtn" type="button" class="secondary">Export Backup</button>
+        <label class="file">
+          Import Backup
+          <input id="importFile" type="file" accept="application/json" />
+        </label>
+        <button id="resetBtn" type="button" class="danger">Reset Data</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
